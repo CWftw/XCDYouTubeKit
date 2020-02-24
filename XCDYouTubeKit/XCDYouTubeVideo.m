@@ -193,6 +193,8 @@ static NSDate * ExpirationDate(NSURL *streamURL)
 			[streamQueries addObjectsFromArray:alternativeAdaptiveFormats];
 		}
 		
+		_html = info[@"html"];
+		
 		NSString *title = info[@"title"] == nil? videoDetails[@"title"] : info[@"title"];
 		if (title == nil)
 			title = @"";

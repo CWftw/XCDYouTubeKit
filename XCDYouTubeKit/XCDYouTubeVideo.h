@@ -110,6 +110,8 @@ extern NSString *const XCDYouTubeVideoQualityHTTPLiveStreaming;
 @property (nonatomic, readonly) NSDictionary *streamURLs;
 #endif
 
+@property (nonatomic, nullable) NSString *html;
+
 /**
 
 *  A streamURL that is compatible on Apple devices.

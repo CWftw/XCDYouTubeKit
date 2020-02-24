@@ -69,6 +69,7 @@
 				if ([(NSObject *)value isKindOfClass:[NSString class]] || [(NSObject *)value isKindOfClass:[NSNumber class]])
 					info[key] = [(NSObject *)value description];
 			}];
+			info[@"html"] = self.html;
 			_videoInfo = [info copy];
 		}
 	}
