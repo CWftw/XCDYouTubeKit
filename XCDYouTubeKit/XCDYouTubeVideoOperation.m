@@ -287,6 +287,7 @@ static NSError *YouTubeError(NSError *error, NSSet *regionsAllowed, NSString *la
 			return;
 		}
 		[video mergeVideo:self.noStreamVideo];
+		video.isAgeRestricted = self.webpage.isAgeRestricted;
 		[self finishWithVideo:video];
 	}
 	else
