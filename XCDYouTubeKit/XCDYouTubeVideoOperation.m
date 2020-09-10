@@ -115,23 +115,29 @@ static NSError *YouTubeError(NSError *error, NSSet *regionsAllowed, NSString *la
 
 - (void) startNextRequest
 {
-	if (self.eventLabels.count == 0)
+	if (self.eventLabels.count == 3)
 	{
-		if (self.requestType == XCDYouTubeRequestTypeWatchPage || self.webpage)
-		{
-			if (self.ranLastEmbedPage == NO) {
-				[self startLastEmbedPageRequest];
-				return;
-			}
-			[self finishWithError];
-		}
-		else
-		{
-			[self startWatchPageRequest];
-		}
+		[self.eventLabels removeObjectAtIndex:0];
+		[self startWatchPageRequest];
 	}
 	else
 	{
+		if (self.eventLabels.count == 0)
+		{
+			if (self.requestType == XCDYouTubeRequestTypeWatchPage || self.webpage)
+			{
+				if (self.ranLastEmbedPage == NO) {
+					[self startLastEmbedPageRequest];
+					return;
+				}
+				[self finishWithError];
+			}
+			else
+			{
+				[self startWatchPageRequest];
+			}
+		}
+		
 		NSString *eventLabel = [self.eventLabels objectAtIndex:0];
 		[self.eventLabels removeObjectAtIndex:0];
 		
@@ -419,7 +425,7 @@ static NSError *YouTubeError(NSError *error, NSSet *regionsAllowed, NSString *la
 	
 	self.isExecuting = YES;
 	
-	self.eventLabels = [[NSMutableArray alloc] initWithArray:@[ @"embedded", @"detailpage" ]];
+	self.eventLabels = [[NSMutableArray alloc] initWithArray:@[ @"watchPage", @"embedded", @"detailpage" ]];
 	[self startNextRequest];
 }
 
