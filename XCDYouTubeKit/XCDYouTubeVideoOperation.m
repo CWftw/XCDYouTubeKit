@@ -120,24 +120,21 @@ static NSError *YouTubeError(NSError *error, NSSet *regionsAllowed, NSString *la
 		[self.eventLabels removeObjectAtIndex:0];
 		[self startWatchPageRequest];
 	}
-	else
+	else if (self.eventLabels.count == 0)
 	{
-		if (self.eventLabels.count == 0)
+		if (self.requestType == XCDYouTubeRequestTypeWatchPage || self.webpage)
 		{
-			if (self.requestType == XCDYouTubeRequestTypeWatchPage || self.webpage)
-			{
-				if (self.ranLastEmbedPage == NO) {
-					[self startLastEmbedPageRequest];
-					return;
-				}
-				[self finishWithError];
+			if (self.ranLastEmbedPage == NO) {
+				[self startLastEmbedPageRequest];
+				return;
 			}
-			else
-			{
-				[self startWatchPageRequest];
-			}
+			[self finishWithError];
 		}
-		
+		else
+		{
+			[self startWatchPageRequest];
+		}
+	} else {
 		NSString *eventLabel = [self.eventLabels objectAtIndex:0];
 		[self.eventLabels removeObjectAtIndex:0];
 		
